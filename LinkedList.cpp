@@ -174,7 +174,7 @@ int main()
     li.insertAtPos(50, 1);
     li.insertAtPos(12, 1);
     li.insertAtPos(50, 3);
-    li.insertAtPos(0, 2);
+    li.insertAtPos(50, 0);
     li.display();
     return 0;
 }
