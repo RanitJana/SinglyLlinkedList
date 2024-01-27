@@ -117,7 +117,7 @@ public:
             temp = temp->next;
         }
         if (temp->next == NULL)
-        { // single element
+        { 
             head = NULL;
             delete temp;
         }
@@ -140,6 +140,34 @@ public:
         head = head->next;
         delete temp;
     }
+    void eraseNode(int value)
+    {
+        if (!head)
+        {
+            cout << "List is empty.\n";
+            return;
+        }
+        Node *temp = head;
+        if (head->data == value)
+        {
+            head = head->next;
+            delete temp;
+            return;
+        }
+        while (temp->next && temp->next->data != value)
+        {
+            temp = temp->next;
+        }
+        if (temp->next == nullptr)
+        {
+            cout << value << " is not present.\n";
+            return;
+        }
+        Node *del = temp->next;
+        temp->next = del->next;
+        delete del;
+    }
+
     void display()
     {
         if (!head)
@@ -171,10 +199,10 @@ public:
 int main()
 {
     SinglyLinkedList li;
-    li.insertAtPos(50, 1);
+    li.insertAtPos(500, 1);
     li.insertAtPos(12, 1);
     li.insertAtPos(50, 3);
-    li.insertAtPos(50, 0);
+    li.eraseNode(500);
     li.display();
     return 0;
 }
