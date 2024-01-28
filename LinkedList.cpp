@@ -251,15 +251,36 @@ public:
             temp = temp->next;
         return temp != NULL;
     }
-    int searchPos(int value){
-        if(head==NULL) return -1;
-        Node* temp=head;
-        int pos=1;
-        while(temp && temp->data!=value){
+    int searchPos(int value)
+    {
+        if (head == NULL)
+            return -1;
+        Node *temp = head;
+        int pos = 1;
+        while (temp && temp->data != value)
+        {
             ++pos;
-            temp=temp->next;
+            temp = temp->next;
         }
-        return temp?pos:-1;
+        return temp ? pos : -1;
+    }
+
+    void reverse()
+    {
+        if (head == NULL || head->next == NULL)
+        {
+            cout << "Nothing to reverse.\n";
+            return;
+        }
+        Node *prev2 = NULL, *prev = head, *curr = head;
+        while (curr)
+        {
+            curr = curr->next;
+            prev->next = prev2;
+            prev2 = prev;
+            prev = curr;
+        }
+        head = prev2;
     }
 
     void display()
@@ -296,7 +317,9 @@ int main()
     li.insertAtPos(500, 1);
     li.insertAtPos(12, 1);
     li.insertAtPos(50, 3);
-    cout<<li.searchPos(120)<<endl;
+    li.reverse();
+    li.push_back(10);
+    li.reverse();
     li.display();
     return 0;
 }
