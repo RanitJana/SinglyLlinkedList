@@ -212,32 +212,56 @@ public:
     }
     void eraseBefore(int value)
     {
-        if(head==NULL){
-            cout<<"List is empty."<<endl;
+        if (head == NULL)
+        {
+            cout << "List is empty." << endl;
             return;
         }
-        if(head->data==value){
-            cout<<"Nothing to delete."<<endl;
+        if (head->data == value)
+        {
+            cout << "Nothing to delete." << endl;
             return;
         }
-        if(head->next && head->next->data==value){
-            Node*del=head;
-            head=head->next;
+        if (head->next && head->next->data == value)
+        {
+            Node *del = head;
+            head = head->next;
             delete del;
             return;
         }
-        Node* temp=head;
-        while(temp->next && temp->next->next && temp->next->next->data!=value){
-            temp=temp->next;
+        Node *temp = head;
+        while (temp->next && temp->next->next && temp->next->next->data != value)
+        {
+            temp = temp->next;
         }
-        if(temp->next->next==NULL){
-            cout<<value<<" is not found.\n";
+        if (temp->next->next == NULL)
+        {
+            cout << value << " is not found.\n";
             return;
         }
-        Node*del=temp->next;
-        temp->next=del->next;
+        Node *del = temp->next;
+        temp->next = del->next;
         delete del;
     }
+
+    bool searchNode(int value)
+    {
+        Node *temp = head;
+        while (temp && temp->data != value)
+            temp = temp->next;
+        return temp != NULL;
+    }
+    int searchPos(int value){
+        if(head==NULL) return -1;
+        Node* temp=head;
+        int pos=1;
+        while(temp && temp->data!=value){
+            ++pos;
+            temp=temp->next;
+        }
+        return temp?pos:-1;
+    }
+
     void display()
     {
         if (!head)
@@ -272,7 +296,7 @@ int main()
     li.insertAtPos(500, 1);
     li.insertAtPos(12, 1);
     li.insertAtPos(50, 3);
-    li.eraseBefore(120);
+    cout<<li.searchPos(120)<<endl;
     li.display();
     return 0;
 }
