@@ -117,7 +117,7 @@ public:
             temp = temp->next;
         }
         if (temp->next == NULL)
-        { 
+        {
             head = NULL;
             delete temp;
         }
@@ -167,7 +167,77 @@ public:
         temp->next = del->next;
         delete del;
     }
-
+    void eraseAtPos(int idx)
+    {
+        if (idx < 0 || idx > size())
+        {
+            cout << "Position is not valid.\n";
+            return;
+        }
+        if (idx == 1)
+        {
+            pop_front();
+        }
+        else
+        {
+            idx--;
+            Node *temp = head;
+            while (--idx)
+            {
+                temp = temp->next;
+            }
+            Node *del = temp->next;
+            temp->next = del->next;
+            delete del;
+        }
+    }
+    void eraseAfter(int value)
+    {
+        if (!head)
+        {
+            cout << "List is empty.\n";
+            return;
+        }
+        Node *temp = head;
+        while (temp->next && temp->data != value)
+            temp = temp->next;
+        if (temp->next == NULL)
+        {
+            cout << "Nothing to delete.\n";
+            return;
+        }
+        Node *del = temp->next;
+        temp->next = del->next;
+        delete del;
+    }
+    void eraseBefore(int value)
+    {
+        if(head==NULL){
+            cout<<"List is empty."<<endl;
+            return;
+        }
+        if(head->data==value){
+            cout<<"Nothing to delete."<<endl;
+            return;
+        }
+        if(head->next && head->next->data==value){
+            Node*del=head;
+            head=head->next;
+            delete del;
+            return;
+        }
+        Node* temp=head;
+        while(temp->next && temp->next->next && temp->next->next->data!=value){
+            temp=temp->next;
+        }
+        if(temp->next->next==NULL){
+            cout<<value<<" is not found.\n";
+            return;
+        }
+        Node*del=temp->next;
+        temp->next=del->next;
+        delete del;
+    }
     void display()
     {
         if (!head)
@@ -202,7 +272,7 @@ int main()
     li.insertAtPos(500, 1);
     li.insertAtPos(12, 1);
     li.insertAtPos(50, 3);
-    li.eraseNode(500);
+    li.eraseBefore(120);
     li.display();
     return 0;
 }
